@@ -1,53 +1,505 @@
-@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap");
+:root {
+    /* Core Colors - Wikipedia Blue Theme */
+    --background: hsl(248, 50%, 96%);
+    --foreground: hsl(215, 16%, 24%);
+
+    --card: hsl(0, 0%, 100%);
+    --card-foreground: hsl(215, 16%, 24%);
+
+    /* Wikipedia Brand Colors */
+    --primary: hsl(213, 94%, 32%);
+    --primary-foreground: hsl(0, 0%, 98%);
+    --primary-hover: hsl(213, 94%, 28%);
+
+    --secondary: hsl(210, 40%, 96%);
+    --secondary-foreground: hsl(215, 16%, 24%);
+
+    --muted: hsl(220, 14%, 96%);
+    --muted-foreground: hsl(220, 9%, 46%);
+
+    --accent: hsl(185, 84%, 46%);
+    --accent-foreground: hsl(0, 0%, 98%);
+
+    --border: hsl(220, 13%, 91%);
+    --input: hsl(220, 13%, 91%);
+    --ring: hsl(213, 94%, 32%);
+
+    /* Custom Wikipedia Theme Colors */
+    --wiki-blue: hsl(213, 94%, 32%);
+    --wiki-blue-light: hsl(213, 84%, 42%);
+    --wiki-teal: hsl(185, 84%, 46%);
+    --wiki-success: hsl(142, 76%, 36%);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--wiki-blue), var(--wiki-blue-light));
+    --gradient-card: linear-gradient(145deg, var(--card), hsl(220, 13%, 97%));
+    --gradient-search: linear-gradient(135deg, var(--wiki-blue), var(--wiki-teal));
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(220, 13%, 65%, 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(220, 13%, 65%, 0.1), 0 2px 4px -1px hsl(220, 13%, 65%, 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(220, 13%, 65%, 0.1), 0 4px 6px -2px hsl(220, 13%, 65%, 0.05);
+    --shadow-glow: 0 0 20px hsl(213, 94%, 32%, 0.15);
+
+    /* Transitions */
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.6;
+}
 
 .main-container {
-    font-family: "Roboto";
+    min-height: 100vh;
 }
 
-.wiki-search-header {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #d5cdcd;
-    padding-top: 30px;
-    padding-right: 20px;
-    padding-bottom: 30px;
-    padding-left: 20px;
-    margin-bottom: 40px;
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
 }
 
-.wiki-logo {
-    margin-bottom: 30px;
-    width: 150px;
+/* Search Header Styles */
+.search-header {
+    position: relative;
+    overflow: hidden;
+    background: var(--gradient-search);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.header-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+}
+
+.pattern-circle {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+.pattern-circle-1 {
+    top: 1rem;
+    left: 1rem;
+    width: 8rem;
+    height: 8rem;
+}
+
+.pattern-circle-2 {
+    top: 2rem;
+    right: 2rem;
+    width: 6rem;
+    height: 6rem;
+}
+
+.pattern-circle-3 {
+    bottom: 1rem;
+    left: 33.333333%;
+    width: 4rem;
+    height: 4rem;
+}
+
+.header-content {
+    position: relative;
+    text-align: center;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.logo-container {
+    position: relative;
+    margin-right: 0.75rem;
+}
+
+.book-icon {
+    width: 3rem;
+    height: 3rem;
+    color: white;
+}
+
+.sparkles-icon {
+    width: 1rem;
+    height: 1rem;
+    color: var(--wiki-teal);
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    animation: pulse 2s infinite;
+}
+
+.main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.125rem;
+    margin: 0 auto 2rem;
+    max-width: 28rem;
+}
+
+.search-container {
+    max-width: 32rem;
+    margin: 0 auto;
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: var(--transition-smooth);
+}
+
+.search-input-wrapper.focused {
+    transform: scale(1.05);
+    filter: drop-shadow(var(--shadow-glow));
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--muted-foreground);
+    transition: var(--transition-smooth);
+    z-index: 1;
+}
+
+.search-input-wrapper.focused .search-icon {
+    color: var(--wiki-blue);
 }
 
 .search-input {
-    font-size: 18px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #d5cdcd;
-    border-radius: 3px;
-    padding: 10px;
-}
-
-.search-results {
     width: 100%;
-    padding-left: 20px;
+    padding: 1rem 1rem 1rem 3rem;
+    font-size: 1.125rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    outline: none;
+    color: var(--foreground);
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-lg);
 }
 
-.result-item {
-    margin-bottom: 20px;
+.search-input::placeholder {
+    color: rgba(var(--muted-foreground), 0.7);
+}
+
+.search-input:focus {
+    border-color: white;
+    background: white;
+}
+
+.loading-spinner {
+    position: absolute;
+    right: 1rem;
+}
+
+.spinner {
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 2px solid var(--wiki-blue);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.search-hint {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+    text-align: center;
+}
+
+/* Search Results Styles */
+.search-results {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.search-results-header {
+    margin-bottom: 1.5rem;
+}
+
+.results-count {
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+}
+
+.search-query {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.results-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.result-card {
+    background: var(--gradient-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition: var(--transition-smooth);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.result-card:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-lg);
 }
 
 .result-title {
-    font-size: 22px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    display: block;
+    transition: var(--transition-fast);
 }
 
-.link-description {
-    color: #444444;
-    font-size: 15px;
+.result-title:hover {
+    color: var(--primary-hover);
+    text-decoration: none;
 }
 
 .result-url {
-    color: #006621;
+    color: var(--wiki-success);
+    font-size: 0.875rem;
     text-decoration: none;
+    margin-bottom: 0.75rem;
+    display: block;
+    word-break: break-all;
+}
+
+.result-description {
+    color: var(--muted-foreground);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.result-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+}
+
+.reading-time, .word-count {
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Loading States */
+.skeleton {
+    background: linear-gradient(90deg, var(--muted) 25%, transparent 50%, var(--muted) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+.skeleton-title {
+    height: 1.5rem;
+    width: 75%;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.skeleton-url {
+    height: 1rem;
+    width: 50%;
+    border-radius: 0.25rem;
+    margin-bottom: 0.75rem;
+}
+
+.skeleton-text {
+    height: 1rem;
+    width: 100%;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    padding: 4rem 0;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.welcome-content {
+    max-width: 32rem;
+    margin: 0 auto;
+}
+
+.welcome-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.875rem;
+    font-weight: 600;
+    color: var(--foreground);
+    margin-bottom: 1rem;
+}
+
+.welcome-description {
+    font-size: 1.125rem;
+    color: var(--muted-foreground);
+    line-height: 1.75;
+    margin-bottom: 3rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    background: var(--gradient-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.feature-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+}
+
+.feature-icon-blue {
+    background: hsl(213, 94%, 32%, 0.1);
+}
+
+.feature-icon-teal {
+    background: hsl(185, 84%, 46%, 0.1);
+}
+
+.feature-icon-success {
+    background: hsl(142, 76%, 36%, 0.1);
+}
+
+.feature-title {
+    font-weight: 600;
+    color: var(--foreground);
+    margin-bottom: 0.5rem;
+}
+
+.feature-description {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    margin: 0;
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.no-results-icon {
+    width: 4rem;
+    height: 4rem;
+    color: var(--muted-foreground);
+    margin: 0 auto 1rem;
+}
+
+.no-results-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--foreground);
+    margin-bottom: 0.5rem;
+}
+
+.no-results-description {
+    color: var(--muted-foreground);
+    max-width: 28rem;
+    margin: 0 auto;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .search-header {
+        padding: 1.5rem;
+    }
+    
+    .main-title {
+        font-size: 1.875rem;
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* Hidden utility */
+.hidden {
+    display: none;
 }
