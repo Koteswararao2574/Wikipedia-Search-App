@@ -1,31 +1,132 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki Explorer - Search Wikipedia Articles</title>
+    <meta name="description" content="Explore Wikipedia's vast collection of knowledge. Search millions of articles and discover comprehensive, well-researched information on any topic.">
+    <meta name="author" content="Wiki Explorer">
 
+    <meta property="og:title" content="Wiki Explorer - Search Wikipedia Articles">
+    <meta property="og:description" content="Your gateway to exploring Wikipedia's vast collection of knowledge. Search for any topic and discover comprehensive articles.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@wiki_explorer">
+    <meta name="twitter:title" content="Wiki Explorer - Search Wikipedia Articles">
+    <meta name="twitter:description" content="Explore Wikipedia's vast collection of knowledge with our modern search interface.">
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
+
+    <link rel="canonical" href="https://lovable.dev/projects/ac877ab5-31b6-42c1-81e9-415d38140050">
+    <meta name="keywords" content="wikipedia, search, encyclopedia, knowledge, articles, education, research, information">
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
 <body>
-    <div class="main-container">
-        <div class="wiki-search-header text-center">
-            <img class="wiki-logo" src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-dynamic-webapps/wiki-logo-img.png" />
-            <br />
-            <input placeholder="Type a keyword and press Enter to search" type="search" class="search-input w-100" id="searchInput" />
-        </div>
-        <div class="d-none" id="spinner">
-            <div class="d-flex justify-content-center">
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
+    <main class="main-container">
+        <div class="container">
+            <!-- Search Header -->
+            <header class="search-header">
+                <!-- Background Pattern -->
+                <div class="header-pattern">
+                    <div class="pattern-circle pattern-circle-1"></div>
+                    <div class="pattern-circle pattern-circle-2"></div>
+                    <div class="pattern-circle pattern-circle-3"></div>
                 </div>
-            </div>
+
+                <div class="header-content">
+                    <!-- Logo and Title -->
+                    <div class="logo-section">
+                        <div class="logo-container">
+                            <svg class="book-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
+                            </svg>
+                            <svg class="sparkles-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9.5 12L7 7l-1.5 5L1 10l4.5 2L7 17l2.5-5L14 14l-4.5-2z"/>
+                            </svg>
+                        </div>
+                        <h1 class="main-title">Wiki Explorer</h1>
+                    </div>
+
+                    <!-- Subtitle -->
+                    <p class="subtitle">Discover knowledge from the world's largest encyclopedia</p>
+
+                    <!-- Search Input -->
+                    <div class="search-container">
+                        <div class="search-input-wrapper" id="searchWrapper">
+                            <svg class="search-icon" id="searchIcon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                            </svg>
+                            <input 
+                                type="text" 
+                                placeholder="Type a keyword and press Enter to search..."
+                                id="searchInput"
+                                class="search-input"
+                            />
+                            <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Search Hint -->
+                        <p class="search-hint">
+                            Press Enter to search • Try "Albert Einstein", "Ancient Rome", or "Quantum Physics"
+                        </p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Search Results -->
+            <div id="searchResults" class="search-results"></div>
+
+            <!-- Welcome Message -->
+            <section id="welcomeSection" class="welcome-section">
+                <div class="welcome-content">
+                    <h2 class="welcome-title">Welcome to Wiki Explorer</h2>
+                    <p class="welcome-description">
+                        Your gateway to exploring Wikipedia's vast collection of knowledge. 
+                        Search for any topic and discover comprehensive, well-researched articles 
+                        from the world's largest encyclopedia.
+                    </p>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon feature-icon-blue">
+                                <span>🔍</span>
+                            </div>
+                            <h3 class="feature-title">Fast Search</h3>
+                            <p class="feature-description">
+                                Instantly search millions of Wikipedia articles
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon feature-icon-teal">
+                                <span>📚</span>
+                            </div>
+                            <h3 class="feature-title">Rich Content</h3>
+                            <p class="feature-description">
+                                Access comprehensive, well-researched information
+                            </p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon feature-icon-success">
+                                <span>🌍</span>
+                            </div>
+                            <h3 class="feature-title">Global Knowledge</h3>
+                            <p class="feature-description">
+                                Explore topics from around the world in multiple languages
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="search-results" id="searchResults"></div>
-    </div>
+    </main>
+
     <script src="script.js"></script>
 </body>
-
 </html>
